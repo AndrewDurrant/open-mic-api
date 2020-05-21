@@ -7,7 +7,7 @@ CREATE TABLE openmic_users (
   password TEXT NOT NULL,
   email TEXT NOT NULL, 
   date_created TIMESTAMP DEFAULT now() NOT NULL,
-  date_modified TIMESTAMP,
+  date_modified TIMESTAMP
 );
 
 

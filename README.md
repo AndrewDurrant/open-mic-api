@@ -29,10 +29,10 @@ When your new project is ready for deployment, add a new Heroku application with
 PSQL COMMANDS:
 
 **create a database**
-createdb -U dunder_mifflin knex-practice
+createdb -U open_mic open-mic
 
 **create database tables by running sql script**
-psql -U dunder_mifflin -d knex-practice -f ./sql-scripts/create.whopipe-and-amazong.sql
+psql -U open_mic -d open-mic -f ./sql-scripts/create.whopipe-and-amazong.sql
 
 **seed the database with:**
 psql -U dunder_mifflin -d blogful -f ./seeds/seed.blogful_articles.sql

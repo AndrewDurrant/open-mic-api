@@ -3,8 +3,10 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
-
 const { NODE_ENV } = require('./config');
+const videosRouter = require('./videos/videos-router');
+const interactionsRouter = require('./interactions/interactions-router');
+
 
 const app = express();
 
@@ -19,6 +21,9 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.json({ message: 'Hello, World!' });
 });
+
+app.use('/api/video', videosRouter);
+// app.use('/api/interaction/', interactionsRouter);
 
 app.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
   let message; // eslint-disable-line no-unused-vars
