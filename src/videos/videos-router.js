@@ -30,7 +30,8 @@ videosRouter
       req.params.media_id
     )
       .then(interactions => {
-        res.json(VideosService.serializeVideoInteraction(interactions));
+        res.json(interactions)
+        // res.json(VideosService.serializeVideoInteraction(interactions));
       })
       .catch(next);
   });

@@ -14,12 +14,12 @@ VALUES
   ('SamanthaSings', 'Samantha Teton', 'mountain', 'lovetosing@gmail.com');
 
 INSERT INTO media (title, link, description,user_id)
-VALUES
-  ('Frozen Margarita', 'https://www.youtube.com/watch?v=-0JDlAn2Y5Y', 'I was inspired to write this song one night while drinking warm sake.', 4), 
-  ('Call on Jah', 'https://www.youtube.com/watch?v=kMKwkDDtlfI', 'When times are tough and living is rough, you know what to do.', 2),
-  ('Country Road', 'https://www.youtube.com/watch?v=SEx2PzrRUfY', 'One of my all time favorite covers to sing.', 1),
-  ('Gina Chavez', 'https://www.youtube.com/watch?v=sRZi4QQEGBI', 'These lyrics were inspired from a trip to Bali.', 3),
+VALUES 
   ('Poor Man', 'https://www.youtube.com/watch?v=2uwpaxTkDrY', 'Wrote this with a good friend of mine. I hope you like it!', 2),
+  ('Country Road', 'https://www.youtube.com/watch?v=SEx2PzrRUfY', 'One of my all time favorite covers to sing.', 1),
+  ('Call on Jah', 'https://www.youtube.com/watch?v=kMKwkDDtlfI', 'When times are tough and living is rough, you know what to do.', 2),
+  ('Frozen Margarita', 'https://www.youtube.com/watch?v=-0JDlAn2Y5Y', 'I was inspired to write this song one night while drinking warm sake.', 4),
+  ('Gina Chavez', 'https://www.youtube.com/watch?v=sRZi4QQEGBI', 'These lyrics were inspired from a trip to Bali.', 3),
   ('Streets', 'https://www.youtube.com/watch?v=0hD-Z1q_ZyI', 'What can I say. I am Doja Cat. Moo!', 1);
 
 
@@ -31,10 +31,10 @@ INSERT INTO openmic_interactions (
   user_id) 
 VALUES
   (4, 'loved this!', 4, 2), 
-  (2, 'Not bad.', 2, 3), 
-  (3, 'This had me dancing!', 4, 1), 
+  (2, 'Not bad.', 3, 3), 
+  (3, 'This had me dancing!', 4, 4), 
   (1, 'I want my time back.', 2, 1), 
-  (4, 'I want to play guitar like that!', 2, 2), 
+  (4, 'I want to play guitar like that!', 1, 2), 
   (3, 'Thank you for sharing this.', 2, 3);
 
 COMMIT;

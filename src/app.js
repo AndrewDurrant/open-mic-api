@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hello, World!' });
 });
 
-app.use('/api/video', videosRouter);
-// app.use('/api/interaction/', interactionsRouter);
+app.use('/api/videos', videosRouter);
+// app.use('/api/interaction', interactionsRouter);
 
 app.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
   let message; // eslint-disable-line no-unused-vars

@@ -12,7 +12,7 @@ const VideosService = {
         'media.link',
         'media.description',
         ...userFields,
-        // rework these so they are useful(avg rating). Maybe just the second one? Currently does not seem to work
+        // rework these so they are useful(avg rating). Maybe just the second one? Currently the second one does not seem to work
         db.raw(
           `count(DISTINCT interact) AS number_of_interactions`
         ),
@@ -41,21 +41,10 @@ const VideosService = {
 
   getInteractionsForVideo(db, media_id) {
     return db
-      .from('openmic_interactions AS interact')
-      .select(
-        'interact.id',
-        'interact.comment',
-        'interact.rating',
-        'interact.date_created',
-        ...userFields,
-      )
-      .where('interact.video_id', media_id)
-      .leftJoin(
-        'openmic_users AS usr',
-        'interact.user_id',
-        'usr.id',
-      )
-      .groupBy('interact.id','usr.id')
+      .raw(`select interact.id, interact.comment, interact.rating, interact.media_id, openmic_users.id, openmic_users.user_name from openmic_interactions as interact
+      left join openmic_users on interact.user_id = openmic_users.id 
+      where media_id = ?`, [media_id])
+      .then(data => data.rows)
   },
 
   serializeVideos(videos) {
