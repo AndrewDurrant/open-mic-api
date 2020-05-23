@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/videos', videosRouter);
-// app.use('/api/interaction', interactionsRouter);
+app.use('/api/interactions', interactionsRouter);
 
 app.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
   let message; // eslint-disable-line no-unused-vars

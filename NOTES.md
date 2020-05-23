@@ -26,3 +26,11 @@ ADD A DESCRIPTION COLUMN TO MEDIA TABLE
 **Wednesday 5.20.2020**
 
 1 Currently using github -> thinkful-ed -> blogful-api-auth -> Branch: login-endpoint 
+
+**Thursday 5.21.2020**
+1- Get all POSTS working!
+---> POST comment; POST rating; POST video;
+
+2- Get user login up and running 
+
+3- 

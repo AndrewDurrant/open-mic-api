@@ -34,7 +34,11 @@ VALUES
   (2, 'Not bad.', 3, 3), 
   (3, 'This had me dancing!', 4, 4), 
   (1, 'I want my time back.', 2, 1), 
-  (4, 'I want to play guitar like that!', 1, 2), 
+  (4, 'I want to play guitar like that!', 1, 2),
+  (1, 'This is not good.', 5, 3), 
+  (2, 'pretty good.', 6, 1),
+  (3, 'hana ho!', 3, 4), 
+  (4, 'I love your voice', 6, 2), 
   (3, 'Thank you for sharing this.', 2, 3);
 
 COMMIT;

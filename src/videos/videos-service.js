@@ -2,35 +2,49 @@ const xss = require('xss');
 const Treeize = require('treeize');
 
 const VideosService = {
-  getAllVideos(db) {
-    return db
-      .from('media AS media')
-      .select(
-        'media.id',
-        'media.title',
-        'media.date_created',
-        'media.link',
-        'media.description',
-        ...userFields,
-        // rework these so they are useful(avg rating). Maybe just the second one? Currently the second one does not seem to work
-        db.raw(
-          `count(DISTINCT interact) AS number_of_interactions`
-        ),
-        db.raw(
-          `AVG(interact.rating) AS average_rating`
-        ),
-      )
-      .leftJoin(
-        'openmic_interactions as interact',
-        'media.id',
-        `interact.media_id`,
-      )
-      .leftJoin(
-        `openmic_users AS usr`,
-        `media.user_id`,
-        `usr.id`,
-      )
-      .groupBy(`media.id`, `usr.id`)
+  getAllVideos: (db) => {
+    
+    db.raw('SELECT title, link, description, date_created FROM media').then(data => data.rows);
+
+
+
+    // return db
+    //   .from('media AS media')
+    //   .select(
+    //     'media.id',
+    //     'media.title',
+    //     'media.date_created',
+    //     'media.link',
+    //     'media.description',
+    //     ...userFields,
+    //     // ...interactionsFields,
+    //     // rework these so they are useful(avg rating). Maybe just the second one? Currently the second one does not seem to work
+    //     db.raw(
+    //       `count(DISTINCT interact) AS number_of_interactions`
+    //     ),
+    //     db.raw(
+    //       `AVG(interact.rating) AS average_rating`
+    //     ),
+    //   )
+    //   .leftJoin(
+    //     `openmic_interactions as interact`,
+    //     `media.id`,
+    //     `interact.media_id`,
+    //   )
+    //   .leftJoin(
+    //     `openmic_users AS usr`,
+    //     `media.user_id`,
+    //     `usr.id`,
+    //   )
+    //   .groupBy(`media.id`, `usr.id`)
+  },
+
+  getComments: (db, id) => {
+    db.raw(`SELECT openmic_interactions.comment FROM openmic_interactions where media_id=${id}`).then(data => data.rows);
+  },
+
+  getRating: (db, id) => {
+    db.raw(`SELECT AVG(rating) AS rate FROM openmic_interactions WHERE media_id=${id}`).then(data => data.rows[0].rate);
   },
 
   getById(db, id) {
@@ -66,33 +80,34 @@ const VideosService = {
       description: xss(videoData.description),
       date_created: videoData.date_created,
       user: videoData.user || {},
+      // interactions: videoData.interaction || {},
       number_of_interactions: Number(videoData.number_of_interactions) || 0,
       average_comment_rating: Math.round(videoData.average_comment_rating) || 0,
     }
   },
 
+  // Not currently using the next two methods below. They were being used in getInteractionsForVideo to format the interactions. Currently the`data => data.rows` is accomplishing the format of the response. Along with line 33 in `videos-router.js on client-side. ALERT xss is not being used!!
+  // serializeVideoInteractions(interactions) {
+  //   return videos.map(this.serializeVideoInteraction)
+  // },
 
-  serializeVideoInteractions(interactions) {
-    return videos.map(this.serializeVideoInteraction)
-  },
+  // serializeVideoInteraction(interaction) {
+  //   const interactionTree = new Treeize()
 
-  serializeVideoInteraction(interaction) {
-    const interactionTree = new Treeize()
+  //   // Some light hackiness to allow for the fact that `treeize`
+  //   // only accepts arrays of objects, and we want to use a single
+  //   // object.
+  //   const interactionData = interactionTree.grow([ interaction ]).getData()[0]
 
-    // Some light hackiness to allow for the fact that `treeize`
-    // only accepts arrays of objects, and we want to use a single
-    // object.
-    const interactionData = interactionTree.grow([ interaction ]).getData()[0]
-
-    return {
-      id: interactionData.id,
-      rating: interactionData.rating,
-      media_id: interactionData.media_id,
-      comment: xss(interactionData.comment),
-      user: interactionData.user,
-      date_created: interactionData.date_created,
-    }
-  },
+  //   return {
+  //     id: interactionData.id,
+  //     rating: interactionData.rating,
+  //     media_id: interactionData.media_id,
+  //     comment: xss(interactionData.comment),
+  //     user: interactionData.user,
+  //     date_created: interactionData.date_created,
+  //   }
+  // },
 }
 
   const userFields = [
@@ -101,6 +116,13 @@ const VideosService = {
     'usr.user_name AS user:user_name',
     'usr.date_created AS user:date_created',
     'usr.date_modified AS user:date_modified',
+  ]
+
+  const interactionsFields = [
+    'interact.id AS interaction:id', 
+    'interact.comment AS interaction:comment',
+    'interact.rating AS interaction:rating',
+    'interact.user_id AS interaction:interaction_owner',
   ]
 
   module.exports = VideosService

@@ -8,11 +8,30 @@ videosRouter
   .route('/')
   .get((req, res, next) => {
     VideosService.getAllVideos(req.app.get('db'))
-      .then(videos => {
-        res.json(VideosService.serializeVideos(videos));
+    .then(videos => console.log(videos))
+    .then(videos => {
+      let videosWithComments = videos.map(video => {
+        let comments;
+        return VideosService.getComments(req.app.get('db'), media.id)
+        .then(_comments => {
+          comments = _comments
+          return VideosService.getRating(req.app.get('db'), media.id)
+        })
+        .then(rating => {
+          return {...video, comments, rating}
+        })
       })
-      .catch(next);
-  });
+      return Promise.all(videosWithComments);
+    })
+    .then(videosWithComments => res.json(videosWithComments))
+    .catch(next);
+  })
+
+
+
+  // .post(jsonBodyParser, (req, res, next) => {
+  //   const{}
+  // })
 
 videosRouter
   .route('/:media_id')
