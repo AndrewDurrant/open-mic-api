@@ -36,13 +36,16 @@ const InteractionsService = {
 
   insertComment(db, newComment) {
     return db
-      .insert(newComment)
-      .into('openmic_interactions')
-      .returning('*')
-      .then(([comment]) => comment)
-      .then(comment =>
-        InteractionsService.getById(db, comment.id)  
-      )
+      .raw(`INSERT INTO openmic_interactions (comment, media_id, user_id)
+            VALUES ('${newComment.comment}', '${newComment.media_id}', '${newComment.user_id}')`)
+      // .insert(newComment)
+      // .into('openmic_interactions')
+      // .returning('*')
+      // .then(([comment]) => comment)
+      // .then(comment => {
+      //   console.log('LINE 44', comment)
+      //   InteractionsService.getById(db, comment.id)  
+      // })
   },
 
   serializeComment(comment) {
