@@ -1,21 +1,18 @@
 const express = require('express');
 const path = require('path');
 const InteractionService = require('./interactions-service');
-const { requireAuth } = require('../middleware/jwt-auth');
 
 const interactionsRouter = express.Router();
 const jsonBodyParser = express.json();
 
 interactionsRouter
   .route('/comment')
-  .post(requireAuth, jsonBodyParser, (req, res, next) => {
-    console.log(req.body);
-    
+  .post(jsonBodyParser, (req, res, next) => {
     const { video_id, comment } = req.body;
-    const newComment = { video_id, comment };
+    const newComment = { video_id, comment, user_id };
 
     for (const [key, value] of Object.entries(newComment))
-      if (value == null)
+      if (value === null)
         return res.status(400).json({
           error: `Missing '${key}' in request body`
         });
@@ -37,7 +34,7 @@ interactionsRouter
 
 interactionsRouter
   .route('/rating')
-  .post(requireAuth, jsonBodyParser, (req, res, next) => {
+  .post(/*requireAuth,*/ jsonBodyParser, (req, res, next) => {
     const { video_id, rating } = req.body;
     const newRating = { video_id, rating };
 

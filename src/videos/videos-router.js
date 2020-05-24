@@ -8,14 +8,13 @@ videosRouter
   .route('/')
   .get((req, res, next) => {
     VideosService.getAllVideos(req.app.get('db'))
-    .then(videos => console.log(videos))
     .then(videos => {
-      let videosWithComments = videos.map(video => {
+      let videosWithComments = videos.map(video => {        
         let comments;
-        return VideosService.getComments(req.app.get('db'), media.id)
+        return VideosService.getComments(req.app.get('db'), video.id)
         .then(_comments => {
           comments = _comments
-          return VideosService.getRating(req.app.get('db'), media.id)
+          return VideosService.getRating(req.app.get('db'), video.id)
         })
         .then(rating => {
           return {...video, comments, rating}
@@ -33,6 +32,8 @@ videosRouter
   //   const{}
   // })
 
+
+// Not currently using this method in any capacity. It does get you a specific video 
 videosRouter
   .route('/:media_id')
   .all(checkVideoExists)
@@ -40,6 +41,7 @@ videosRouter
     res.json(VideosService.serializeVideo(res.video));
   });
 
+  //Not currently using this method. It does get you video specific interactions
 videosRouter
   .route('/:media_id/interactions/')
   .all(checkVideoExists)

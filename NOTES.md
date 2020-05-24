@@ -33,4 +33,23 @@ ADD A DESCRIPTION COLUMN TO MEDIA TABLE
 
 2- Get user login up and running 
 
-3- 
+**Saturday 5.23.2020**
+MVP User Stories:
+1- A user can watch videos--DONE
+    a. anonymous user can only watch videos/see description.
+
+2- A logged in user can comment/rate
+
+3- A user can login
+
+4- An auth user can post video 
+
+5- user can see average rating
+
+6- Auth user can see last 2 reviews
+
+7- Auth user can delete videos
+
+8- Auth user can update rating
+
+9- SECONDARY- An unAuth user can create account
