@@ -29,6 +29,7 @@ interactionsRouter
       newComment
     )
       .then(comment => {
+        console.log('INTERACTIONS ROUTER', comment)
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${comment.id}`))
