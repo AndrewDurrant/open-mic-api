@@ -1,15 +1,17 @@
 const express = require('express');
 const path = require('path');
 const InteractionService = require('./interactions-service');
+const { requireAuth } = require('../middleware/basic-auth');
+
 
 const interactionsRouter = express.Router();
 const jsonBodyParser = express.json();
 
 interactionsRouter
   .route('/comment')
-  .post(jsonBodyParser, (req, res, next) => {
+  .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const { video_id, comment } = req.body;
-    const newComment = { video_id, comment, user_id };
+    const newComment = { video_id, comment };
 
     for (const [key, value] of Object.entries(newComment))
       if (value === null)
@@ -34,7 +36,7 @@ interactionsRouter
 
 interactionsRouter
   .route('/rating')
-  .post(/*requireAuth,*/ jsonBodyParser, (req, res, next) => {
+  .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const { video_id, rating } = req.body;
     const newRating = { video_id, rating };
 
@@ -57,6 +59,6 @@ interactionsRouter
           .json(InteractionService.serializeRating(rating));
       })
       .catch(next);
-  });
+});
 
 module.exports = interactionsRouter;

@@ -53,3 +53,6 @@ MVP User Stories:
 8- Auth user can update rating
 
 9- SECONDARY- An unAuth user can create account
+
+**QUESTIONS FOR TA**
+- Do I need to implement Xss?
