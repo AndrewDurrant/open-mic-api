@@ -2,7 +2,6 @@ const xss = require('xss')
 
 const InteractionsService = {
   getById(db, id) {
-    console.log('GETBYID', id)
     return db
       .from('openmic_interactions AS interaction')
       .select(
@@ -35,20 +34,6 @@ const InteractionsService = {
       .first()
   },
 
-
-    // rename save interaction
-  // insertComment(db, newComment) {
-  //   // return db
-  //   //   .raw(`INSERT INTO openmic_interactions (comment, media_id, user_id)
-  //   //         VALUES ('${newComment.comment}', '${newComment.media_id}', '${newComment.user_id}')`)
-  //   let recordExists = false;// do a get interaction should return true or false 
-  //   if (recordExists === true) {
-  //     return updateInteraction(db, newComment);
-  //   } else {
-  //     return insertInteraction(db, newComment);
-  //   }
-  // },
-
   insertInteraction(db, data) {
     return db
       .insert(data)
@@ -56,9 +41,7 @@ const InteractionsService = {
       .returning('*')
       .then(([comment]) => comment)
       .then(comment => {
-        console.log('LINE 48', comment)
         return InteractionsService.getById(db, comment.id) 
-        // return comment 
       })
   },
 

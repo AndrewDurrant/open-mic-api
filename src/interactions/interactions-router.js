@@ -11,15 +11,12 @@ interactionsRouter
   .route('/comment')
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const { video_id, comment } = req.body;
-    console.log(Object.keys(req.body));
     
     const newComment = { 
       media_id: video_id,
       // rating,
       comment 
     };
-
-    console.log('2 INTERACTIONS ROUTER', newComment);
 
     for (const [key, value] of Object.entries(newComment))
       if (value == null)
@@ -34,7 +31,6 @@ interactionsRouter
       newComment
     )
       .then((comment) => {
-        console.log('COMMENTING NOW', comment);
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${comment.id}`))
@@ -74,8 +70,3 @@ interactionsRouter
 });
 
 module.exports = interactionsRouter;
-
-
-
-// "error": "insert into \"openmic_interactions\" (\"comment\", \"user_id\", \"video_id\") values ($1, $2, $3) returning * - column \"video_id\" of relation \"openmic_interactions\" does not exist"
-
