@@ -1,6 +1,7 @@
 const AuthService = require('../auth/auth-service');
 
 function requireAuth(req, res, next) {
+  
   const authToken = req.get('Authorization') || '';
 
   let basicToken;
@@ -11,10 +12,13 @@ function requireAuth(req, res, next) {
   }
 
   const [tokenUserName, tokenPassword] = AuthService.parseBasicToken(basicToken);
-  
+
   if (!tokenUserName || !tokenPassword) {
     return res.status(401).json({ error: 'Unauthorized request' });
   }
+
+  console.log('1 BASIC AUTH', tokenUserName);
+
 
   AuthService.getUserWithUserName(
     req.app.get('db'),
@@ -29,8 +33,6 @@ function requireAuth(req, res, next) {
       next();
     })
     .catch(next);
-  
-  
 }
 
 module.exports = {

@@ -2,6 +2,7 @@ const xss = require('xss')
 
 const InteractionsService = {
   getById(db, id) {
+    console.log('GETBYID', id)
     return db
       .from('openmic_interactions AS interaction')
       .select(
@@ -30,32 +31,54 @@ const InteractionsService = {
         'interaction.user_id',
         'usr.id',
       )
-      .where('interaction.id',id)
+      .where('interaction.id', id)
       .first()
   },
 
-  insertComment(db, newComment) {
+
+    // rename save interaction
+  // insertComment(db, newComment) {
+  //   // return db
+  //   //   .raw(`INSERT INTO openmic_interactions (comment, media_id, user_id)
+  //   //         VALUES ('${newComment.comment}', '${newComment.media_id}', '${newComment.user_id}')`)
+  //   let recordExists = false;// do a get interaction should return true or false 
+  //   if (recordExists === true) {
+  //     return updateInteraction(db, newComment);
+  //   } else {
+  //     return insertInteraction(db, newComment);
+  //   }
+  // },
+
+  insertInteraction(db, data) {
     return db
-      .raw(`INSERT INTO openmic_interactions (comment, media_id, user_id)
-            VALUES ('${newComment.comment}', '${newComment.media_id}', '${newComment.user_id}')`)
-      // .insert(newComment)
-      // .into('openmic_interactions')
-      // .returning('*')
-      // .then(([comment]) => comment)
-      // .then(comment => {
-      //   console.log('LINE 44', comment)
-      //   InteractionsService.getById(db, comment.id)  
-      // })
+      .insert(data)
+      .into('openmic_interactions')
+      .returning('*')
+      .then(([comment]) => comment)
+      .then(comment => {
+        console.log('LINE 48', comment)
+        return InteractionsService.getById(db, comment.id) 
+        // return comment 
+      })
   },
+
+
+  // updateInteraction() {
+
+  // }
+
+
 
   serializeComment(comment) {
     const { user } = comment
+    console.log('SERIALIZE', user)
     return {
       id: comment.id,
-      text: xss(comment.text),
-      video_id: comment.video_id,
+      comment: xss(comment.comment),
+      media_id: comment.media_id,
       date_created: new Date(comment.date_created),
       user: {
+        user_id: user.id,
         user_name: user.user_name,
         full_name: user.full_name,
         date_created: new Date(user.date_created),

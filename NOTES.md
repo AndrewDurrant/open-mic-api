@@ -54,5 +54,43 @@ MVP User Stories:
 
 9- SECONDARY- An unAuth user can create account
 
+**Monday 5.25.2020**
+MVP User Stories:
+1- POST comment
+
+2- POST rating
+
+3- PATCH rating
+
+4- DELETE video as auth
+
+5- PATH description/title as auth
+
+6- POST video as auth
+
+7- GET user data
+
+****
+
+1- show 2 Most Recent comments **DONE**
+
+2- logout user **DONE**
+
+3- sort by rating high to low **DONE**
+
+4- Best Rated displays "create account" button for unauth
+
+5- My Videos displays "upload video link" button
+
+6- Upload Video nav link and Upload Video page
+
+7- My Videos displays title and description as editable boxes for auth
+
+8- My Videos displays "update" & "delete" buttons on video card for auth
+
+-- potential: "show more" comments button
+
+-- potential: see ratings as unauth
+
 **QUESTIONS FOR TA**
 - Do I need to implement Xss?

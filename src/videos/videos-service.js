@@ -6,7 +6,7 @@ const VideosService = {
 
   getComments(db, media_id) {
     return db
-      .raw('SELECT openmic_interactions.comment, openmic_interactions.user_id FROM openmic_interactions where media_id = ?', [media_id]).then(data => data.rows);
+      .raw('SELECT openmic_interactions.comment, openmic_interactions.user_id, openmic_interactions.date_created FROM openmic_interactions where media_id = ?', [media_id]).then(data => data.rows);
   },
 
   getRating(db, id) {

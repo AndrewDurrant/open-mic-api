@@ -11,25 +11,30 @@ interactionsRouter
   .route('/comment')
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const { video_id, comment } = req.body;
+    console.log(Object.keys(req.body));
+    
     const newComment = { 
       media_id: video_id,
+      // rating,
       comment 
     };
 
+    console.log('2 INTERACTIONS ROUTER', newComment);
+
     for (const [key, value] of Object.entries(newComment))
-      if (value === null)
+      if (value == null)
         return res.status(400).json({
           error: `Missing '${key}' in request body`
         });
     
     newComment.user_id = req.user.id;
-
-    InteractionService.insertComment(
+    
+    InteractionService.insertInteraction(
       req.app.get('db'),
       newComment
     )
-      .then(comment => {
-        console.log('INTERACTIONS ROUTER', comment)
+      .then((comment) => {
+        console.log('COMMENTING NOW', comment);
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${comment.id}`))
