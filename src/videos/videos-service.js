@@ -50,10 +50,10 @@ const VideosService = {
       .update(newVideoFields);
   },
 
-  matchVideoToUser(db, user_id, video_id) {
+  getUserVideos(db, user_id) {
     return db
       .raw(`SELECT * FROM media WHERE media.user_id = ${user_id}`).then(data => data.rows);
-  }
+  },
   
   serializeVideo(video) {
     console.log('VIDEOS SERVICE', video);

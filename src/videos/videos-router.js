@@ -65,9 +65,12 @@ videosRouter
       res.json(VideosService.serializeVideo(res.video))
     })
     .delete((req, res, next) => {
-      console.log('LINE 68', req.user.id, req.params) 
-      const authCheck = VideosService.matchVideoToUser(db, req.user.id, req.params.video_id)
-      if ()
+      if (req.user.id !== res.video.user_id) {
+        return res.status(401).json({
+          error: 'User is not owner!'
+        })
+      }
+
       VideosService.deleteVideo(
         req.app.get('db'),
         req.params.video_id
@@ -87,6 +90,12 @@ videosRouter
           error: {
             message: `Request body must contain either 'title', or 'description'`
           }
+        })
+      }
+      
+      if (req.user.id !== res.video.user_id) {
+        return res.status(401).json({
+          error: 'User is not owner!'
         })
       }
 
