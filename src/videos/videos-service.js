@@ -17,7 +17,20 @@ const VideosService = {
       .raw(`SELECT AVG(rating) AS rate FROM openmic_interactions WHERE media_id=${id}`).then(data => data.rows[0].rate);
   }, 
   
+  insertVideo(db, data) {
+    return db
+      .insert(data)
+      .into('media')
+      .returning('*')
+      .then(([video]) => video)
+      .then(video => {
+        return VideosService.getById(db, video.id);
+      });
+  },
+
   getById(db, id) {
+    console.log('GET BY ID', id);
+    
     return db
       .from('media')
       .select('*')
@@ -25,21 +38,25 @@ const VideosService = {
       .first();
   },
 
-  insertVideo(db, data) {
-    console.log('INSERT VIDEO');
-    return db
-      .insert(data)
-      .into('media')
-      .returning('*')
-      .then(([video]) => video)
-      .then(video => {
-        return VideosService.getById(db, video.id)
-      });
-
+  deleteVideo(db, id) {
+    return db('media')
+      .where({ id })
+      .delete();
   },
+
+  updateVideo(db, id, newVideoFields) {
+    return db('media')
+      .where({ id })
+      .update(newVideoFields);
+  },
+
+  matchVideoToUser(db, user_id, video_id) {
+    return db
+      .raw(`SELECT * FROM media WHERE media.user_id = ${user_id}`).then(data => data.rows);
+  }
   
   serializeVideo(video) {
-    console.log('VIDEOS SERVICE', video)
+    console.log('VIDEOS SERVICE', video);
     const videoTree = new Treeize();
 
     // Some light hackiness to allow for the fact that `treeize`

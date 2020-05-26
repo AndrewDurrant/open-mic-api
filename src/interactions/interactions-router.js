@@ -7,6 +7,7 @@ const { requireAuth } = require('../middleware/basic-auth');
 const interactionsRouter = express.Router();
 const jsonBodyParser = express.json();
 
+// REFACTOR both rating and comment should just be to the home route as well as being combined into one.
 interactionsRouter
   .route('/comment')
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
@@ -39,6 +40,8 @@ interactionsRouter
       .catch(next);
   });
 
+
+// This should happen within '/comments' which actually should not be called comments but just the root path.
 interactionsRouter
   .route('/rating')
   .post(requireAuth, jsonBodyParser, (req, res, next) => {

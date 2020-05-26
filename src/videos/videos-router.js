@@ -56,19 +56,57 @@ videosRouter
       })
       .catch(next);
   })
+  
+  videosRouter
+    .route('/:video_id')
+    .all(requireAuth)
+    .all(checkVideoExists)
+    .get((req, res, next) => {
+      res.json(VideosService.serializeVideo(res.video))
+    })
+    .delete((req, res, next) => {
+      console.log('LINE 68', req.user.id, req.params) 
+      const authCheck = VideosService.matchVideoToUser(db, req.user.id, req.params.video_id)
+      if ()
+      VideosService.deleteVideo(
+        req.app.get('db'),
+        req.params.video_id
+      )
+        .then(() => {
+          res.status(204).end()
+        })
+        .catch(next);
+    })
+    .patch(jsonBodyParser, (req, res, next) => {
+      const { title, description } = req.body
+      const videoToUpdate = { title, description }
 
+      const numberOfValues = Object.values(videoToUpdate).filter(Boolean).length
+      if (numberOfValues === 0) {
+        return res.status(400).json({
+          error: {
+            message: `Request body must contain either 'title', or 'description'`
+          }
+        })
+      }
 
-  // This is for posting a video
-  // .post(jsonBodyParser, (req, res, next) => {
-  //   const{}
-  // })
+      VideosService.updateVideo(
+        req.app.get('db'),
+        req.params.video_id,
+        videoToUpdate
+      )
+        .then(() => {
+          res.status(204).end()
+        })
+        .catch(next);
+    })
 
 /* async/await syntax for promises */
 async function checkVideoExists(req, res, next) {
   try {
     const video = await VideosService.getById(
       req.app.get('db'),
-      req.params.media_id
+      req.params.video_id
     )
 
     if (!video)
