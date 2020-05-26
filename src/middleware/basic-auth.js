@@ -17,9 +17,6 @@ function requireAuth(req, res, next) {
     return res.status(401).json({ error: 'Unauthorized request' });
   }
 
-  console.log('1 BASIC AUTH', tokenUserName);
-
-
   AuthService.getUserWithUserName(
     req.app.get('db'),
     tokenUserName

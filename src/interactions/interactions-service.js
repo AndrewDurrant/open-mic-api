@@ -45,16 +45,12 @@ const InteractionsService = {
       })
   },
 
-
   // updateInteraction() {
-
+    // Future functionality
   // }
-
-
 
   serializeComment(comment) {
     const { user } = comment
-    console.log('SERIALIZE', user)
     return {
       id: comment.id,
       comment: xss(comment.comment),

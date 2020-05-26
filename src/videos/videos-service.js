@@ -28,9 +28,7 @@ const VideosService = {
       });
   },
 
-  getById(db, id) {
-    console.log('GET BY ID', id);
-    
+  getById(db, id) {    
     return db
       .from('media')
       .select('*')
@@ -56,7 +54,6 @@ const VideosService = {
   },
   
   serializeVideo(video) {
-    console.log('VIDEOS SERVICE', video);
     const videoTree = new Treeize();
 
     // Some light hackiness to allow for the fact that `treeize`
