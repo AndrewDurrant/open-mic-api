@@ -36,3 +36,6 @@ psql -U open_mic -d open-mic -f ./sql-scripts/create.whopipe-and-amazong.sql
 
 **seed the database with:**
 psql -U dunder_mifflin -d blogful -f ./seeds/seed.blogful_articles.sql
+
+**seed heroku database**
+$ heroku pg:psql -f ./seeds/seed.openmic_tables.sql

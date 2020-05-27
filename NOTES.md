@@ -80,17 +80,15 @@ MVP User Stories:
 
 4- Best Rated displays "create account" button for unauth
 
-5- My Videos displays "upload video link" button
+5- My Videos displays "share video link" button for unauth
 
-6- Upload Video nav link and Upload Video page
+6- Upload Video nav link and Upload Video page **DONE**
 
 7- My Videos displays title and description as editable boxes for auth
 
 8- My Videos displays "update" & "delete" buttons on video card for auth
 
--- potential: "show more" comments button
-
--- potential: see ratings as unauth
+9- create Page Not Found Route/component
 
 **QUESTIONS FOR TA**
 - Do I need to implement Xss?
