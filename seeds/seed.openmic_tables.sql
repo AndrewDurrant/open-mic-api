@@ -8,10 +8,10 @@ TRUNCATE
 
 INSERT INTO openmic_users (user_name, full_name, password, email)
 VALUES
-  ('Digital Dave', 'David Maui', '$2a$12$S6J6uJcg45/.Wrlu3IMjFuu2DsAdJ9NeS4eDbkUOY3AC6.XaCmy2O', 'dave@yahoo.com'),
-  ('Russ365', 'Russell Govinda', '$2a$12$su8VI/1Q3dBB5hiiQ73oTeaifS9D2mDXAkVJXYjBkgznF9y3ZSHWu', 'russ@yahoo.com'),
-  ('Eddy River', 'Edward Thames', '$2a$12$EGRy.KH/ChFwzqAwQYUmP.AbolmHugZRYupx0ZV.jnYCT9vZu9Kqe', 'water@gmail.com'),
-  ('SamanthaSings', 'Samantha Teton', '$2a$12$ueWsMY9v1sEjEydCU8uC6OsGExGGkoY3n8OYUCVOkLpH0gV8sntmu', 'lovetosing@gmail.com');
+  ('digital dave', 'David Maui', 'digital808', 'dave@yahoo.com'),
+  ('russ365', 'Russell Govinda', 'abc123abc', 'russ@yahoo.com'),
+  ('eddy river', 'Edward Thames', 'river8282', 'water@gmail.com'),
+  ('samanthasings', 'Samantha Teton', 'mountainmelody77', 'lovetosing@gmail.com');
 
 INSERT INTO media (title, link, description,user_id)
 VALUES 

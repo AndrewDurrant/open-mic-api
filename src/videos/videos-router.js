@@ -76,7 +76,7 @@ videosRouter
         req.params.video_id
       )
         .then(() => {
-          res.status(204).end()
+          res.status(201).json({success: true})
         })
         .catch(next);
     })
@@ -105,7 +105,7 @@ videosRouter
         videoToUpdate
       )
         .then(() => {
-          res.status(204).end()
+          res.status(201).json({success: true})
         })
         .catch(next);
     })

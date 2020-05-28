@@ -4,7 +4,7 @@ const Treeize = require('treeize');
 const VideosService = {
   getAllVideos(db) {
     return db
-      .raw('SELECT id, title, link, description, date_created FROM media').then(data => data.rows);
+      .raw('SELECT id, title, link, description, date_created, user_id FROM media').then(data => data.rows);
   },
 
   getComments(db, media_id) {
