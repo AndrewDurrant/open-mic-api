@@ -78,17 +78,15 @@ MVP User Stories:
 
 3- sort by rating high to low **DONE**
 
-4- Best Rated displays "create account" button for unauth
+4- My Videos displays "share video link" button for unauth
 
-5- My Videos displays "share video link" button for unauth
+5- Upload Video nav link and Upload Video page **DONE**
 
-6- Upload Video nav link and Upload Video page **DONE**
+6- My Videos displays title and description as editable boxes for auth
 
-7- My Videos displays title and description as editable boxes for auth
+7- My Videos displays "update" & "delete" buttons on video card for auth
 
-8- My Videos displays "update" & "delete" buttons on video card for auth
-
-9- create Page Not Found Route/component
+8- create Page Not Found Route/component **DONE**
 
 **QUESTIONS FOR TA**
 - Do I need to implement Xss?

@@ -15,7 +15,10 @@ usersRouter
       req.app.get('db'),
       req.user.id
     )
-      .then(userData => res.json(userData))
+      .then(userData => {
+        console.log('USER ROUTER', userData)
+        res.json(userData)
+      })
       .catch(next);
   });
 
