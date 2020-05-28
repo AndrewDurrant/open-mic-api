@@ -119,8 +119,8 @@ MVP User Stories:
 
 13. You must deploy a live, publicly-accessible version of your app
 
-14. Your app must live at a custom URL and include a Favicon
+14. Your app must live at a custom URL and include a Favicon *DONE*
 
 15. Your app must work across different browsers (Chrome, Firefox, and Safari at a minimum)
 
-16. If auth in app, you must set up demo user and indicate on landing page how to use it
+16. If auth in app, you must set up demo user and indicate on landing page how to use it *DONE*
