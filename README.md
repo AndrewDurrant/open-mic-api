@@ -1,29 +1,14 @@
-# Express Boilerplate!
+OPEN-MIC: Hop up on stage and share your talents!
 
-This is a boilerplate project used for starting new projects!
+A link to your live app.
 
-## Set up
+Documentation of your API.
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+Screenshot(s) of your app. This makes your app description much easier to understand.
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+A summary section. This should have a concise explanation of what your app does. Try to frame this from the standpoint of what the user does, or what the app enables for the user.
 
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+A section on the technology used.
 
 
 PSQL COMMANDS:
