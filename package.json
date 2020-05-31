@@ -2,7 +2,7 @@
   "name": "open-mic-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "nodemon": "^2.0.2",
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
 }

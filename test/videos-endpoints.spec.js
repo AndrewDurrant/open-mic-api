@@ -2,7 +2,7 @@ const knex = require('knex');
 const app = require('../src/app');
 const { makeVideosArray, makeMaliciousVideo } = require('./videos.fixtures');
 
-describe.only('Videos Endpoints', function () {
+describe('Videos Endpoints', function () {
   let db;
 
   before('make knex instance', () => {
@@ -18,19 +18,19 @@ describe.only('Videos Endpoints', function () {
   // before('clean table', () => db('media').truncate());
 
   before(() => db('media').del()); // *** Daniel suggested solution: do we create the table after this?
-
+  
   // afterEach('cleanup', () => db('media').truncate());
 
   afterEach(() => db('media').del()); // Daniel's solution
 
   describe('GET /videos', () => {
-    // context('Given no videos', () => {
-    //   it('responds with 200 and an empty array', () => {
-    //     return supertest(app)
-    //       .get('/videos')
-    //       .expect(200, []);
-    //   });
-    // });
+    context('Given no videos', () => {
+      it('responds with 200 and an empty array', () => {
+        return supertest(app)
+          .get('/videos')
+          .expect(200, []);
+      });
+    });
 
     context('Given there are videos in the database', () => {
       const testVideos = makeVideosArray();
