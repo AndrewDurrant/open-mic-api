@@ -1,8 +1,29 @@
-OPEN-MIC: Hop up on stage and share your talents!
+**OPEN-MIC: App for sharing your musical performances through external video links**
 
-A link to your live app.
+Live Website: https://open-mic.now.sh/
 
-Documentation of your API.
+__SETTING UP__
+
+- Install dependencies: npm install
+- Create development and test databases: `createdb open-mic`, `createdb open-mic-test`
+- Create database user: `createuser postgres`
+- Grant privileges to new user in psql:  
+  - `GRANT ALL PRIVILEGES ON DATABASE open-mic TO postgres`
+  - `GRANT ALL PRIVILEGES ON DATABASE "open-mic-test" TO postgres`
+- Prepare environment file: `cp example.env .env`
+- Replace values in `.env` with your custom values.
+- Bootstrap development database: `npm run migrate`
+- Bootstrap test database: `npm run migrate:test`
+
+__Configuring Postgres__
+
+For tests involving time to run properly, your Postgres database must be configured to run in the UTC timezone.
+  1. Locate the postgresql.conf file for your Postgres installation
+    - OS X, Homebrew: /usr/local/var/postgres/postgresql.conf
+  2. Uncomment the timezone line and set it to UTC as follows:  
+  ` - Locale and Formatting - `  
+
+      `datestyle = 'iso, mdy'`
 
 Screenshot(s) of your app. This makes your app description much easier to understand.
 
