@@ -24,6 +24,14 @@ For tests involving time to run properly, your Postgres database must be configu
   ` - Locale and Formatting - `  
 
       `datestyle = 'iso, mdy'`
+      `#intervalstyle = 'postgres'`
+      `timezone = 'UTC'`
+      `#timezone_abbreviations = 'Default'  #Select the set of available time zone`
+
+__Sample Data__
+
+- To seed the database for development: `psql -U open_mic -d open-mic -f ./seeds/seed.openmic_tables.sql`
+
 
 Screenshot(s) of your app. This makes your app description much easier to understand.
 
