@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const InteractionService = require('./interactions-service');
-const { requireAuth } = require('../middleware/basic-auth');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 
 const interactionsRouter = express.Router();

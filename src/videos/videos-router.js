@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const VideosService = require('./videos-service');
-const { requireAuth } = require('../middleware/basic-auth');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const videosRouter = express.Router();
 const jsonBodyParser = express.json();
