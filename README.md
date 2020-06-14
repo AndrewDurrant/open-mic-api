@@ -38,7 +38,6 @@ __Scripts__
 - Run tests: `npm test`
 
 
-A summary section. This should have a concise explanation of what your app does. Try to frame this from the standpoint of what the user does, or what the app enables for the user.
 
 1. **Landing Page:** ![](images/landingpage.png)  
 Here on the landing page the user has the options of logging in, creating an account or watching videos as an anonymous user. The user also can experience the app as an authorized user by using the demo account provided within the page description.   
