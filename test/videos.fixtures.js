@@ -50,7 +50,7 @@ function makeInteractionsArray() {
       comment: 'great', 
       date_created: '2020-05-29 13:52:49',
       rating: 3,
-      // user_id: 2,
+      user_id: 2,
       media_id: 1,
     },
     {
@@ -58,7 +58,7 @@ function makeInteractionsArray() {
       comment: 'awesome', 
       date_created: '2020-04-29 13:52:49',
       rating: 4,
-      // user_id: 1,
+      user_id: 1,
       media_id: 2,
     },
     {
@@ -66,7 +66,7 @@ function makeInteractionsArray() {
       comment: 'thank you', 
       date_created: '2020-03-29 13:52:49',
       rating: 2,
-      // user_id: 3,
+      user_id: 3,
       media_id: 3,
     },
     {
@@ -74,7 +74,7 @@ function makeInteractionsArray() {
       comment: 'sweet', 
       date_created: '2020-02-29 13:52:49',
       rating: 3,
-      // user_id: 1,
+      user_id: 1,
       media_id: 2,
     },
   ]}

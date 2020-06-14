@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config');
 const videosRouter = require('./videos/videos-router');
 const interactionsRouter = require('./interactions/interactions-router');
 const usersRouter = require('./users/users-router');
+const authRouter = require('./auth/auth-router');
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/api/videos', videosRouter);
 app.use('/api/interactions', interactionsRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
 
 app.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
   let message; // eslint-disable-line no-unused-vars

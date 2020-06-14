@@ -124,3 +124,9 @@ MVP User Stories:
 15. Your app must work across different browsers (Chrome, Firefox, and Safari at a minimum)
 
 16. If auth in app, you must set up demo user and indicate on landing page how to use it *DONE*
+
+DATABASE NOTES:
+('digital dave', 'David Maui', 'digital808', 'dave@yahoo.com'),
+('russ365', 'Russell Govinda', 'abc123abc', 'russ@yahoo.com'),
+('eddy river', 'Edward Thames', 'river8282', 'water@gmail.com'),
+('samanthasings', 'Samantha Teton', 'mountainmelody77', 'lovetosing@gmail.com');
