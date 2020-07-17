@@ -1,6 +1,6 @@
 const knex = require('knex');
 const app = require('../src/app');
-const { makeVideosArray, makeInteractionsArray, makeMaliciousVideo } = require('./videos.fixtures');
+const helpers = require('./test-helpers');
 
 describe('Videos Endpoints', function () {
   let db;
@@ -30,8 +30,8 @@ describe('Videos Endpoints', function () {
     });
 
     context('Given there are videos in the database', () => {
-      const testVideos = makeVideosArray();
-      const testInteractions = makeInteractionsArray();
+      const testVideos = helpers.makeVideosArray();
+      const testInteractions = helpers.makeInteractionsArray();
 
       beforeEach('insert videos', () => {
         return db

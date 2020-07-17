@@ -1,6 +1,6 @@
 const knex = require('knex');
 const app = require('../src/app');
-const { makeInteractionsArray, makeMaliciousInteraction } = require('./interactions.fixtures');
+const helpers = require('./test-helpers');
 
 // describe('Interactions Endpoints', function () {
 //   let db;

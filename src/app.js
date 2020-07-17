@@ -16,6 +16,8 @@ const morganOption = NODE_ENV === 'production'
   ? 'tiny'
   : 'common';
 
+// middleware 
+
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());

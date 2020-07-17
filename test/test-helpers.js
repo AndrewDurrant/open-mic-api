@@ -1,3 +1,47 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const date = new Date();
+
+function makeUsersArray() {
+  return [{
+    id: 1,
+    user_name: 'test-user-1',
+    full_name: 'User One',
+    email:'userone@gmail.cover-empty',
+    password: '@password1', // unsure of why this is not encrypted here.
+    date_created: date.toISOString(),
+    date_modified:null
+  },
+  {
+    id: 2,
+    user_name: 'test-user-2',
+    full_name: 'User Two',
+    email:'usertwo@gmail.com',
+    password: '@password1',
+    date_created: date.toISOString(),
+    date_modified:null
+  },
+  {
+    id: 3,
+    user_name: 'test-user-3',
+    full_name: 'User Three',
+    email:'userthree@gmail.com',
+    password: '@password1',
+    date_created: date.toISOString(),
+    date_modified:null
+  },
+  {
+    id: 4,
+    user_name: 'test-user-4',
+    full_name: 'User Four',
+    email:'userfour@gmail.com',
+    password: '@password1',
+    date_created: date.toISOString(),
+    date_modified:null
+  },
+]
+}
+
 function makeVideosArray() {
   return [
     {
@@ -6,9 +50,9 @@ function makeVideosArray() {
       link: 'https://www.youtube.com/watch?v=uiBxYDyyb14',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?', 
       date_created: '2029-01-22T16:28:32.615Z',
-      // user_id: 2,
-      // comments: ['great', 'awesome'],
-      // rating: [2, 4, 1],
+      user_id: 2,
+      comments: ['great', 'awesome'],
+      rating: [2, 4, 1],
     },
     {
       id: 2,
@@ -16,9 +60,9 @@ function makeVideosArray() {
       link: 'https://www.youtube.com/watch?v=qM_r-cJ-JZI',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, exercitationem cupiditate dignissimos est perspiciatis, nobis commodi alias saepe atque facilis labore sequi deleniti. Sint, adipisci facere! Velit temporibus debitis rerum.',
       date_created: '2100-05-22T16:28:32.615Z',
-      // user_id: 1,
-      // comments: ['super', 'thank you'],
-      // rating: [3, 4, 2],
+      user_id: 1,
+      comments: ['super', 'thank you'],
+      rating: [3, 4, 2],
     },
     {
       id: 3,
@@ -26,9 +70,9 @@ function makeVideosArray() {
       link: 'https://www.youtube.com/watch?v=T6NFckh8K9k',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, voluptate? Necessitatibus, reiciendis? Cupiditate totam laborum esse animi ratione ipsa dignissimos laboriosam eos similique cumque. Est nostrum esse porro id quaerat.',
       date_created: '1919-12-22T16:28:32.615Z',
-      // user_id: 3,
-      // comments: ['woot', 'right on!'],
-      // rating: [1, 4, 3],
+      user_id: 3,
+      comments: ['woot', 'right on!'],
+      rating: [1, 4, 3],
     },
     {
       id: 4,
@@ -36,9 +80,9 @@ function makeVideosArray() {
       link: 'https://www.youtube.com/watch?v=Sh2R5lOliZE',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum molestiae accusamus veniam consectetur tempora, corporis obcaecati ad nisi asperiores tenetur, autem magnam. Iste, architecto obcaecati tenetur quidem voluptatum ipsa quam?',
       date_created: '1919-12-22T16:28:32.615Z',
-      // user_id: 2,
-      // comments: ['nice', 'that sucked'],
-      // rating: [1, 3, 1],
+      user_id: 2,
+      comments: ['nice', 'that sucked'],
+      rating: [1, 3, 1],
     },
   ];
 }
@@ -98,9 +142,47 @@ function makeMaliciousVideo() {
   }
 }
 
+function cleanTables(db) {
+  return db.transaction(trx =>
+    trx.raw(
+      `TRUNCATE
+      openmic_users,
+      media,
+      openmic_interactions
+    `
+    )
+      .then(() =>
+        Promise.all([
+          trx.raw(`ALTER SEQUENCE openmic_users_id_seq minvalue 0 START WITH 1`),
+          trx.raw(`ALTER SEQUENCE media_id_seq minvalue 0 START WITH 1`),
+          trx.raw(`ALTER SEQUENCE openmic_interactions_id_seq minvalue 0 START WITH 1`),
+          trx.raw(`SELECT setval('openmic_users_id_seq', 0)`),
+          trx.raw(`SELECT setval('media_id_seq', 0)`),
+          trx.raw(`SELECT setval('openmic_interactions_id_seq', 0)`),
+        ])
+      )
+  )
+}
+
+function seedUsers(db, users) {
+  const hashedUsers = users.map(user => ({
+    ...user,
+    password: bcrypt.hashSync(user.password, 1)
+  }));
+  return db.into('openmic_users').insert(hashedUsers)
+    .then(() =>
+      db.raw(
+        `SELECT setval('openmic_users_id_seq', ?)`,
+        users[users.length - 1].id
+      )
+    );
+};
+
 module.exports = {
   makeVideosArray,
   makeMaliciousVideo,
   makeInteractionsArray,
+  makeUsersArray,
+  cleanTables,
+  seedUsers,
 }
-
