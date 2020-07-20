@@ -34,7 +34,7 @@ const InteractionsService = {
       .first()
   },
 
-  insertInteraction(db, data) {
+  insertComment(db, data) {
     return db
       .insert(data)
       .into('openmic_interactions')
@@ -45,9 +45,17 @@ const InteractionsService = {
       })
   },
 
-  // updateInteraction() {
-    // Future functionality
-  // }
+
+  insertRating(db, data) {
+    return db
+      .insert(data)
+      .into('openmic_interactions')
+      .returning('*')
+      .then(([rating]) => rating)
+      .then(rating => {
+        return InteractionsService.getById(db, rating.id) 
+      })
+  },
 
   serializeComment(comment) {
     const { user } = comment
