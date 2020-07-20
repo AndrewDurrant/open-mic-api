@@ -9,7 +9,7 @@ const jsonBodyParser = express.json();
 usersRouter
   .route('/')
   .get(requireAuth, jsonBodyParser, (req, res, next) => {
-
+    if (!req.user) res.status(401).json({ error: 'You must be signed in to get that data!' });
     UsersService.getUserData(
       req.app.get('db'),
       req.user.id
@@ -61,13 +61,10 @@ usersRouter
                   .json(UsersService.serializeUser(user));
               });
 
-          })
+          });
 
       })
       .catch(next);
-
-
-
   });
 
 module.exports = usersRouter;

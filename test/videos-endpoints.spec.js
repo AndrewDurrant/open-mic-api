@@ -30,8 +30,13 @@ describe('Videos Endpoints', function () {
     });
 
     context('Given there are videos in the database', () => {
-      const testVideos = helpers.makeVideosArray();
-      const testInteractions = helpers.makeInteractionsArray();
+      const { testUsers, testVideos, testInteractions } = helpers.makeVideosFixtures();
+
+      beforeEach('insert users', () => {
+        return db
+          .into('openmic_users')
+          .insert(testUsers);
+      });
 
       beforeEach('insert videos', () => {
         return db
