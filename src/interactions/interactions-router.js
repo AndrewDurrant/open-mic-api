@@ -15,7 +15,6 @@ interactionsRouter
     
     const newComment = { 
       media_id: video_id,
-      // rating,
       comment 
     };
 
@@ -27,7 +26,7 @@ interactionsRouter
     
     newComment.user_id = req.user.id;
     
-    InteractionService.insertInteraction(
+    InteractionService.insertComment(
       req.app.get('db'),
       newComment
     )
@@ -63,11 +62,11 @@ interactionsRouter
       req.app.get('db'),
       newRating
     )
-      .then(comment => {
+      .then((rating) => {
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${rating.id}`))
-          .json(InteractionService.serializeRating(rating));
+          .json(rating);
       })
       .catch(next);
 });
