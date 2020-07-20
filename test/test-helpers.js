@@ -51,8 +51,6 @@ function makeVideosArray(users) {
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?', 
       date_created: '2029-01-22T16:28:32.615Z',
       user_id: users[0].id,
-      comments: ['great', 'awesome'],
-      rating: [2, 4, 1],
     },
     {
       id: 2,
@@ -61,8 +59,6 @@ function makeVideosArray(users) {
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, exercitationem cupiditate dignissimos est perspiciatis, nobis commodi alias saepe atque facilis labore sequi deleniti. Sint, adipisci facere! Velit temporibus debitis rerum.',
       date_created: '2100-05-22T16:28:32.615Z',
       user_id: users[1].id,
-      comments: ['super', 'thank you'],
-      rating: [3, 4, 2],
     },
     {
       id: 3,
@@ -71,8 +67,6 @@ function makeVideosArray(users) {
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, voluptate? Necessitatibus, reiciendis? Cupiditate totam laborum esse animi ratione ipsa dignissimos laboriosam eos similique cumque. Est nostrum esse porro id quaerat.',
       date_created: '1919-12-22T16:28:32.615Z',
       user_id: users[2].id,
-      comments: ['woot', 'right on!'],
-      rating: [1, 4, 3],
     },
     {
       id: 4,
@@ -81,8 +75,6 @@ function makeVideosArray(users) {
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum molestiae accusamus veniam consectetur tempora, corporis obcaecati ad nisi asperiores tenetur, autem magnam. Iste, architecto obcaecati tenetur quidem voluptatum ipsa quam?',
       date_created: '1919-12-22T16:28:32.615Z',
       user_id: users[3].id,
-      comments: ['nice', 'that sucked'],
-      rating: [1, 3, 1],
     },
   ];
 }
@@ -205,7 +197,7 @@ function seedMediaTable(db, users, videos = []) {
     await trx.into('media').insert(videos)
     await trx.raw(
       `SELECT setval('media_id_seq', ?)`,
-      [media[media.length - 1].id]
+      [videos[videos.length - 1].id]
     )
   })
 }
