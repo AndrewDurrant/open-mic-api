@@ -68,7 +68,6 @@ const VideosService = {
       description: xss(videoData.description),
       date_created: videoData.date_created,
       user: videoData.user || {},
-      // interactions: videoData.interaction || {},
       number_of_interactions: Number(videoData.number_of_interactions) || 0,
       average_comment_rating: Math.round(videoData.average_comment_rating) || 0,
     };

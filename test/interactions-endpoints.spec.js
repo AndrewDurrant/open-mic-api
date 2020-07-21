@@ -30,7 +30,6 @@ describe('Interactions Endpoints', function () {
 
 
   describe('POST /api/interactions/comment', () => {
-    // beforeEach(() => helpers.seedUsers(db, testUsers))
     beforeEach(() => helpers.seedMediaTable(db, testUsers, testVideos))
 
 
@@ -54,7 +53,6 @@ describe('Interactions Endpoints', function () {
   })
 
   describe('POST /api/interactions/rating', () => {
-    // beforeEach(() => helpers.seedUsers(db, testUsers))
     beforeEach(() => helpers.seedMediaTable(db, testUsers, testVideos))
 
 

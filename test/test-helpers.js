@@ -8,7 +8,7 @@ function makeUsersArray() {
     user_name: 'test-user-1',
     full_name: 'User One',
     email:'userone@gmail.cover-empty',
-    password: '@password1', // unsure of why this is not encrypted here.
+    password: '@password1',
     date_created: date.toISOString(),
     date_modified:null
   },

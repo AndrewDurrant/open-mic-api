@@ -49,7 +49,6 @@ videosRouter
       newVideo
     )
       .then((video) => { 
-        console.log('line 52', video)
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${video.id}`))
