@@ -48,7 +48,8 @@ videosRouter
       req.app.get('db'), 
       newVideo
     )
-      .then((video) => {
+      .then((video) => { 
+        console.log('line 52', video)
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${video.id}`))
@@ -76,7 +77,7 @@ videosRouter
         req.params.video_id
       )
         .then(() => {
-          res.status(201).json({success: true})
+          res.status(204).json({success: true})
         })
         .catch(next);
     })

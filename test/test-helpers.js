@@ -79,6 +79,74 @@ function makeVideosArray(users) {
   ];
 }
 
+function makeHydratedVideosArray(users) {
+  return [
+    {
+      id: 1,
+      title: 'First test video',
+      link: 'https://www.youtube.com/watch?v=uiBxYDyyb14',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non.Adipisci, pariatur.Molestiae, libero esse hic adipisci autem neque ?',
+      date_created: '2029-01-22T16:28:32.615Z',
+      user_id: 1,
+      comments: [
+        {
+          "comment": "great",
+          "date_created": "2020-05-29T13:52:49.000Z",
+          "user_id": 2
+        }
+      ],
+      rating: '3.0000000000000000'
+    },
+    {
+      id: 2,
+      title: 'Second test video',
+      link: 'https://www.youtube.com/watch?v=qM_r-cJ-JZI',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, exercitationem cupiditate dignissimos est perspiciatis, nobis commodi alias saepe atque facilis labore sequi deleniti. Sint, adipisci facere! Velit temporibus debitis rerum.',
+      date_created: '2100-05-22T16:28:32.615Z',
+      user_id: 2,
+      comments: [
+        {
+          "comment": "awesome",
+          "date_created": "2020-04-29T13:52:49.000Z",
+          "user_id": 1
+        },
+        {
+          "comment": "sweet",
+          "date_created": "2020-02-29T13:52:49.000Z",
+          "user_id": 2
+        }
+      ],
+      rating: '3.5000000000000000'
+    },
+    {
+      id: 3,
+      title: 'Third test video',
+      link: 'https://www.youtube.com/watch?v=T6NFckh8K9k',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, voluptate? Necessitatibus, reiciendis? Cupiditate totam laborum esse animi ratione ipsa dignissimos laboriosam eos similique cumque. Est nostrum esse porro id quaerat.',
+      date_created: '1919-12-22T16:28:32.615Z',
+      user_id: 3,
+      comments: [ 
+        {
+          "comment": "thank you",
+          "date_created": "2020-03-29T13:52:49.000Z",
+          "user_id": 3
+        } 
+      ],
+      rating: '2.0000000000000000'
+    },
+    {
+      id: 4,
+      title: 'Fourth test video!',
+      link: 'https://www.youtube.com/watch?v=Sh2R5lOliZE',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum molestiae accusamus veniam consectetur tempora, corporis obcaecati ad nisi asperiores tenetur, autem magnam. Iste, architecto obcaecati tenetur quidem voluptatum ipsa quam?',
+      date_created: '1919-12-22T16:28:32.615Z',
+      user_id: 4,
+      comments: [],
+      rating: null
+    },
+  ];
+}
+
 function makeInteractionsArray(users) {
   return [
     {
@@ -134,13 +202,27 @@ function makeMaliciousVideo() {
   }
 }
 
+function makeExpectedVideos(video) {
+  return {
+    id: video.id,
+    title: video.title,
+    link: video.link,
+    description: video.description,
+    date_created: video.date_created,
+    date_modified: video.date_modified,
+    user_id: video.user_id,
+  }
+}
+
 function makeVideosFixtures() {
   const testUsers = makeUsersArray();
   const testVideos = makeVideosArray(testUsers);
+  const hydratedVideos = makeHydratedVideosArray(testUsers);
   const testInteractions = makeInteractionsArray(testUsers);
   return {
     testUsers,
     testVideos,
+    hydratedVideos,
     testInteractions
   }
 }
@@ -204,10 +286,12 @@ function seedMediaTable(db, users, videos = []) {
 
 module.exports = {
   makeVideosArray,
+  makeHydratedVideosArray,
   makeMaliciousVideo,
   makeInteractionsArray,
   makeUsersArray,
   makeVideosFixtures,
+  makeExpectedVideos,
   cleanTables,
   seedUsers,
   seedMediaTable,
